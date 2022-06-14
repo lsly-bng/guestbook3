@@ -20,7 +20,7 @@
 				<td><input type="submit" value="삭제"></td>
 			</tr>
 		</table>
-		<a href="/addList">메인으로 돌아가기</a><br> <input type="hidden"
+		<a href="/guestbook3/addList">메인으로 돌아가기</a><br> <input type="hidden"
 			name="no" value="${param.no}">
 	</form>
 
