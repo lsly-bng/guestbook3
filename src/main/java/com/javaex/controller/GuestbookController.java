@@ -2,21 +2,22 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javaex.dao.GuestbookDao;
+import com.javaex.service.GuestbookService;
 import com.javaex.vo.GuestbookVo;
 
 @Controller
 public class GuestbookController {
 
 	// field
+	@Autowired
+	private GuestbookService gbService;
 	// constructor
 	// method - g/s
 	// method - general
@@ -27,14 +28,12 @@ public class GuestbookController {
 
 		System.out.println("GuestbookController>addList()");
 
-		// DAO 통해서 리스트 출력
-		GuestbookDao gbDao = new GuestbookDao();
-		List<GuestbookVo> gbList = gbDao.getGbList();
+		List<GuestbookVo> gbList = gbService.getGbList();
 
 		// DispatcherServlet에 데이터를 보냄
 		model.addAttribute("gbList", gbList);
 
-		return "/WEB-INF/views/addList.jsp";
+		return "addList";
 	}
 
 	// add (등록)
@@ -43,10 +42,7 @@ public class GuestbookController {
 
 		System.out.println("GuestbookController>add()");
 
-		// Dao 통해서 등록 메소드 가져오기
-		GuestbookDao gbDao = new GuestbookDao();
-		int count = gbDao.gbInsert(gbVo);
-		System.out.println(count);
+		gbService.gbInsert(gbVo);
 
 		return "redirect:/addList";
 	}
@@ -57,7 +53,7 @@ public class GuestbookController {
 
 		System.out.println("GuestbookController>deleteForm()");
 
-		return "/WEB-INF/views/deleteForm.jsp";
+		return "deleteForm";
 	}
 
 	// delete (삭제)
@@ -66,10 +62,7 @@ public class GuestbookController {
 
 		System.out.println("GuestbookController>delete()");
 
-		// DAO 통해서 삭제 메소드 가져오기
-		GuestbookDao gbDao = new GuestbookDao();
-		int count = gbDao.gbDelete(gbVo);
-		System.out.println(count);
+		gbService.gbDelete(gbVo);
 
 		return "redirect:/addList";
 	}

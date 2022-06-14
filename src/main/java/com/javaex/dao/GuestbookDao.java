@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.javaex.vo.GuestbookVo;
 
+@Repository
 public class GuestbookDao {
 
 	// 0. import java.sql.*;
@@ -131,9 +134,9 @@ public class GuestbookDao {
 
 	// 방명록 삭제
 	public int gbDelete(GuestbookVo gbVo) {
-		
+
 		int count = -1;
-		
+
 		getConnection();
 
 		try {
